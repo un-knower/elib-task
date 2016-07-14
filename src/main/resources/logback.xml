@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
-    <property name="LOG_FILE" value="../logs/elib_sync.log"/>
+    <property name="LOG_FILE" value="../logs/elib_task.log"/>
     <property name="LOG_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss} %5p [%t] %F:%L %M - %m%n"/>
     <springProfile name="dev">

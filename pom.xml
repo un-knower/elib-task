@@ -77,11 +77,6 @@
 
 		<dependency>
 			<groupId>pentaho-kettle</groupId>
-			<artifactId>pentaho-metadata</artifactId>
-			<version>${pentaho-kettle.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>pentaho-kettle</groupId>
 			<artifactId>kettle-core</artifactId>
 			<version>${pentaho-kettle.version}</version>
 		</dependency>
