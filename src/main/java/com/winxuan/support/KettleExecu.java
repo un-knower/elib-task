@@ -8,11 +8,12 @@ import org.pentaho.di.job.Job;
 import org.pentaho.di.job.JobMeta;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by wangmingsen on 2016/7/13.
  */
-
+@Component
 public class KettleExecu {
 
 
@@ -54,14 +55,6 @@ public class KettleExecu {
         }
     }
 
-    public static void main(String[] args) {
-        String filename = "F:\\kittle\\test.ktr";
-        runTrans(filename);
-
-/*        String s = "111.ktr";
-        System.out.println(s.substring(s.length()-3));*/
-
-    }
     public void kettleDispatch(String filePath){
 
 
