@@ -56,7 +56,7 @@ public class SchedulingConfig {
     /**
      * 数图和九月 Book同步到统计平台
      */
-    @Scheduled(cron = "0 0 0/4 * * ?") // 每4小时执行一次
+ /*   @Scheduled(cron = "0 0 0/4 * * ?")*/ // 每4小时执行一次
     public void bookJobSync() {
         LOG.info("Book data sync start");
         kettleExecu.runJob(bookSync);
