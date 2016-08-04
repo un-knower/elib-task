@@ -65,6 +65,11 @@
 		</dependency>
 		<!--             kittle             -->
 		<dependency>
+			<groupId>ojdbc14</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>20130417</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
