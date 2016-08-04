@@ -7,6 +7,9 @@ package com.winxuan.config;
 
 import com.winxuan.support.KettleExecu;
 import com.winxuan.support.MagazineSync;
+import com.winxuan.web.App;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Configuration
 @EnableScheduling // 启用定时任务
 public class SchedulingConfig {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    public static final Log LOG = LogFactory.getLog(SchedulingConfig.class);
 
     @Value("${kittle.kjb.file}")
     String kittleKjbFile;
+    @Value("${kittle.kjb.file.booksync}")
+    String bookSync;
 
 
 
@@ -34,18 +39,27 @@ public class SchedulingConfig {
      */
     @Scheduled(cron = "0 0 0 0/2 * ?") // 每2天执行一次
     public void scheduler() {
-        logger.info("中邮数据同步 start 》》》》》");
+        LOG.info("中邮 data sync start");
         magazineSync.callRpc();
-        logger.info("中邮数据同步 end 》》》》》");
+        LOG.info("中邮 data sync accomplish");
     }
 
     /**
      * 同步到统计平台
      */
-    @Scheduled(cron = "0 0 0/2 * * ?") // 每1小时执行一次
+    @Scheduled(cron = "0 0 0/4 * * ?") // 每4小时执行一次
     public void behaviorRecordJob() {
-        logger.info("到统计平台开始同步》》》》》");
+        LOG.info("sync start ");
         kettleExecu.runJob(kittleKjbFile);
-        logger.info("到统计平台记录同步完成》》》》》");
+        LOG.info(" sync accomplish");
+    }
+    /**
+     * 数图和九月 Book同步到统计平台
+     */
+    @Scheduled(cron = "0 0 0/4 * * ?") // 每4小时执行一次
+    public void bookJobSync() {
+        LOG.info("Book data sync start");
+        kettleExecu.runJob(bookSync);
+        LOG.info("Book data sync accomplish");
     }
 }
