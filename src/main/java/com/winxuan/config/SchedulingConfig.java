@@ -25,9 +25,6 @@ public class SchedulingConfig {
 
     @Value("${kittle.kjb.file}")
     String kittleKjbFile;
-    @Value("${kittle.kjb.file.booksync}")
-    String bookSync;
-
 
 
     @Autowired
@@ -52,14 +49,5 @@ public class SchedulingConfig {
         LOG.info("sync start ");
         kettleExecu.runJob(kittleKjbFile);
         LOG.info(" sync accomplish");
-    }
-    /**
-     * 数图和九月 Book同步到统计平台
-     */
- /*   @Scheduled(cron = "0 0 0/4 * * ?")*/ // 每4小时执行一次
-    public void bookJobSync() {
-        LOG.info("Book data sync start");
-        kettleExecu.runJob(bookSync);
-        LOG.info("Book data sync accomplish");
     }
 }
