@@ -17,10 +17,10 @@ public class App {
 
     @Value("${kittle.kjb.file}")
     String kittleKjbFile;
-    @Value("${kittle.kjb.file.booksync}")
-    String bookSync;
-
-
+    @Value("${kittle.ktr.file.shutubooksync}")
+    String shutuBookSync;
+    @Value("${kittle.ktr.file.jiuyuebooksync}")
+    String jiuyueBookSync;
     @Autowired
     KettleExecu kettleExecu;
 
@@ -30,21 +30,54 @@ public class App {
     }
 
 
+    /**
+     * 数图BOOK同步
+     * @return
+     */
+    @RequestMapping("shutu/book/sync")
+    String shutuBookSync() {
+        try {
+            LOG.info("shutu book sync start");
+            kettleExecu.runTrans(shutuBookSync);
+            LOG.info("shutu book sync end");
+            return "shutu book sync ok";
+        } catch (Exception e) {
+            return "shutu book sync fail";
+        }
 
-    @RequestMapping("/book/sync")
-    String bookSync() {
-        LOG.info("book sync start");
-        kettleExecu.runJob(bookSync);
-        LOG.info("book sync end");
-        return "book sync ok";
     }
 
+    /**
+     * 九月BOOK同步
+     * @return
+     */
+
+    @RequestMapping("jiuyue/book/sync")
+    String jiuyueBookSync() {
+        try {
+            LOG.info("jiuyue book sync start");
+            kettleExecu.runTrans(jiuyueBookSync);
+            LOG.info("jiuyue book sync end");
+            return "jiuyue book sync ok";
+        } catch (Exception e) {
+            return "jiuyue book sync fail";
+        }
+    }
+
+    /**
+     * 其他行为数据同步
+     * @return
+     */
     @RequestMapping("/sync")
     String sync() {
-        LOG.info("sync start");
-        kettleExecu.runJob(kittleKjbFile);
-        LOG.info("sync accomplish");
-        return "sync ok";
+        try {
+            LOG.info("sync start");
+            kettleExecu.runJob(kittleKjbFile);
+            LOG.info("sync accomplish");
+            return "sync ok";
+        } catch (Exception e) {
+            return "sync fail";
+        }
     }
 
 
